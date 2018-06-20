@@ -1,3 +1,11 @@
+/*
+Next Steps:
+- name lesson plans
+- make new lesson for every line
+- change folder name
+- format the lesson plan better **add Date: and Lesson Name: and stuff to template, do not mess up keys
+*/
+
 function onOpen() {
   var ui = SpreadsheetApp.getUi();
   ui.createMenu('Lesson Planning Tool')
