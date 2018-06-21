@@ -39,13 +39,17 @@ function addData(){
   else{
     folder = folder.next(); 
   }
-  
-  var data = SpreadsheetApp.getActive().getSheetByName('Lesson Data').getDataRange().getDisplayValues();
+  var ss = SpreadsheetApp.getActive();
+  var sheet = ss.getSheetByName('Lesson Data');
+  var sheetdata = sheet.getDataRange();
+  var data = sheetdata.getDisplayValues();
   for(var i = 1; i<data[0].length; i++){
     if(data[i][5] != ""){
       if(data[i][0]=="FALSE" || data[i][1] == "TRUE"){
         var template = DocumentApp.openById(docFile.makeCopy(folder).getId());
         newPlan(data[1], template, data[i][1]);
+        sheet.getRange(i+1, 1).setValue("TRUE");
+        sheet.getRange(i+1, 2).setValue("FALSE");
       }
     }
     else{
