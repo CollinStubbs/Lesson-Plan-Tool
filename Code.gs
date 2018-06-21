@@ -11,12 +11,12 @@ function onOpen() {
   ui.createMenu('Lesson Planning Tool')
   .addItem('Create Data Template', 'createDataTemplate')
   .addItem('Add Data to Template', 'addData')
-  .addItem('Create Custom Table','createCustomTemplate')
+  //.addItem('Create Custom Table','createCustomTemplate')
   .addToUi();
 }
 
 function createDataTemplate(){
- 
+  
   var ss = SpreadsheetApp.getActive();
   var template = SpreadsheetApp.openById('1I8A1Gne1_md0Wiz144ZbEh6WhlTubeK691JJoEkUxLk').getSheets();
   for(var i = 0; i<template.length; i++){
@@ -28,16 +28,16 @@ function createDataTemplate(){
 }
 
 function addData(){
- 
+  
   var id = '1Xy9zobHc8o9yAHSIRYHvrY7KjRDo88__wHfbMuCe06I';
   var docFile = DriveApp.getFileById(id);
   
   var folder = DriveApp.getFoldersByName('Lesson Plan Tool');
   if(folder.hasNext() == false){
-   folder = DriveApp.createFolder('Lesson Plan Tool');
+    folder = DriveApp.createFolder('Lesson Plan Tool');
   }
   else{
-   folder = folder.next(); 
+    folder = folder.next(); 
   }
   
   var data = SpreadsheetApp.getActive().getSheetByName('Lesson Data').getDataRange().getDisplayValues();
@@ -86,19 +86,19 @@ function assessment(asFor, as, of){
   }
   if(as=="TRUE"){
     if(comma){
-     text = text+", As"; 
+      text = text+", As"; 
     }
     else{
-     text = text+"As"; 
+      text = text+"As"; 
       comma = true;
     }
   }
   if(of=="TRUE"){
-     if(comma){
-     text = text+", Of"; 
+    if(comma){
+      text = text+", Of"; 
     }
     else{
-     text = text+"Of"; 
+      text = text+"Of"; 
       comma = true;
     }
   }
@@ -114,19 +114,19 @@ function triangulation(asFor, as, of){
   }
   if(as=="TRUE"){
     if(comma){
-     text = text+", Observation"; 
+      text = text+", Observation"; 
     }
     else{
-     text = text+"Observation"; 
+      text = text+"Observation"; 
       comma = true;
     }
   }
   if(of=="TRUE"){
-     if(comma){
-     text = text+", Product"; 
+    if(comma){
+      text = text+", Product"; 
     }
     else{
-     text = text+"Product"; 
+      text = text+"Product"; 
       comma = true;
     }
   }
@@ -142,60 +142,60 @@ function skills(asFor, as, of, col, com, cit){
   }
   if(as=="TRUE"){
     if(comma){
-     text = text+", Innovation and Creativity"; 
+      text = text+", Innovation and Creativity"; 
     }
     else{
-     text = text+"Innovation and Creativity"; 
+      text = text+"Innovation and Creativity"; 
       comma = true;
     }
   }
   if(of=="TRUE"){
-     if(comma){
-     text = text+", Self-Directed Learning"; 
+    if(comma){
+      text = text+", Self-Directed Learning"; 
     }
     else{
-     text = text+"Self-Directed Learning"; 
+      text = text+"Self-Directed Learning"; 
       comma = true;
     }
   }
-   if(col=="TRUE"){
+  if(col=="TRUE"){
     if(comma){
-     text = text+", Collaboration"; 
+      text = text+", Collaboration"; 
     }
     else{
-     text = text+"Collaboration"; 
+      text = text+"Collaboration"; 
       comma = true;
     }
   }
   if(com=="TRUE"){
     if(comma){
-     text = text+", Communication"; 
+      text = text+", Communication"; 
     }
     else{
-     text = text+"Communication"; 
+      text = text+"Communication"; 
       comma = true;
     }
   }
   if(cit=="TRUE"){
-     if(comma){
-     text = text+", Citizenship"; 
+    if(comma){
+      text = text+", Citizenship"; 
     }
     else{
-     text = text+"Citizenship"; 
+      text = text+"Citizenship"; 
       comma = true;
     }
   }
   
   return text;
 }
-  function createCustomTemplate(){
+function createCustomTemplate(){
   var ss = SpreadsheetApp.getActive();
   var sheet = ss.getSheetByName("Customize Table");
   var tableRange = findTableRange(sheet.getRange("A1:Z1").getDisplayValues());
   
   var sheetTable = sheet.getRange(tableRange);
   var merges = sheetTable.getMergedRanges();
- 
+  
   var doc = DocumentApp.create("Custom Table c");
   var docTable = doc.getBody().appendTable(sheetTable.getDisplayValues());
   
@@ -213,7 +213,7 @@ function skills(asFor, as, of, col, com, cit){
 function findTableRange(row){
   for(var i = 0; i< row[0].length; i++){
     if(row[0][i].indexOf("Table Range") > -1){
-     return row[0][i+1]; 
+      return row[0][i+1]; 
     }
   }
 }
