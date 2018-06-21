@@ -38,12 +38,14 @@ function addData(){
   var data = SpreadsheetApp.getActive().getSheetByName('Lesson Data').getDataRange().getDisplayValues();
  // for(var i = 1; i<data[0].length; i++){
   //if(data[i][0]=="FALSE" || data[i][1] == "TRUE")
+  var template = DocumentApp.openById(docFile.makeCopy(folder).getId());
     newPlan(data[1], template);
  // }
  // template.getBody().replaceText("##NAME##", "John Doe");
 
 }
 function newPlan(lesson, template){
+  
   var body = template.getBody();
   body.replaceText("LESSONNUM",lesson[4]);
   body.replaceText("LESSONTITLE",lesson[5]);
@@ -56,6 +58,8 @@ function newPlan(lesson, template){
   body.replaceText("SKILLS",skills(lesson[14],lesson[15],lesson[16],lesson[17],lesson[18],lesson[19])); 
   body.replaceText("LESSON",lesson[20]); 
   body.replaceText("ACCOMMODATIONS",lesson[21]); 
+  
+  template.setName(lesson[5] + " - " + lesson[2] );
 }
 function assessment(asFor, as, of){
   var text = "Assessment: ";
