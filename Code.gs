@@ -1,8 +1,8 @@
 /*
 Next Steps:
 - name lesson plans DONE
-- make new lesson for every line
-- change folder name
+- make new lesson for every line DONE
+- change folder name DONE
 - format the lesson plan better **add Date: and Lesson Name: and stuff to template, do not mess up keys
 */
 
@@ -58,17 +58,18 @@ function addData(){
 function newPlan(lesson, template, update){
   
   var body = template.getBody();
-  body.replaceText("LESSONNUM",lesson[4]);
-  body.replaceText("LESSONTITLE",lesson[5]);
-  body.replaceText("UNIT",lesson[3]);
-  body.replaceText("DATE",lesson[2]);  
-  body.replaceText("SUCCESS",lesson[6]); 
-  body.replaceText("LEARNING",lesson[7]); 
-  body.replaceText("ASSESSMENT",assessment(lesson[8], lesson[9], lesson[10])); 
-  body.replaceText("TRIANGULATION",triangulation(lesson[11], lesson[12], lesson[13])); 
-  body.replaceText("SKILLS",skills(lesson[14],lesson[15],lesson[16],lesson[17],lesson[18],lesson[19])); 
-  body.replaceText("LESSON",lesson[20]); 
-  body.replaceText("ACCOMMODATIONS",lesson[21]); 
+  body.replaceText("CCCC",lesson[4]);
+  body.replaceText("DDDD",lesson[5]);
+  body.replaceText("BBBB",lesson[3]);
+  body.replaceText("AAAA",lesson[2]);  
+  body.replaceText("EEEE",lesson[6]); 
+  body.replaceText("FFFF",lesson[7]);
+  body.replaceText("LLLL",lesson[8]);
+  body.replaceText("GGGG",assessment(lesson[9], lesson[10], lesson[11])); 
+  body.replaceText("HHHH",triangulation(lesson[12], lesson[13], lesson[14])); 
+  body.replaceText("IIII",skills(lesson[15],lesson[16],lesson[17],lesson[18],lesson[19],lesson[20])); 
+  body.replaceText("JJJJ",lesson[21]); 
+  body.replaceText("KKKK",lesson[22]); 
   
   if(update == "TRUE"){
     template.setName(lesson[5] + " - " + lesson[2] + " UPDATE "+(new Date()).toDateString());
@@ -77,7 +78,7 @@ function newPlan(lesson, template, update){
   }
 }
 function assessment(asFor, as, of){
-  var text = "Assessment: ";
+  var text = "";
   var comma = false;
   if(asFor=="TRUE"){
     text = text+"For";
@@ -105,7 +106,7 @@ function assessment(asFor, as, of){
   return text;
 }
 function triangulation(asFor, as, of){
-  var text = "Triangulation: ";
+  var text = "";
   var comma = false;
   if(asFor=="TRUE"){
     text = text+"Conversation";
@@ -133,7 +134,7 @@ function triangulation(asFor, as, of){
   return text;
 }
 function skills(asFor, as, of, col, com, cit){
-  var text = "Skills: ";
+  var text = "";
   var comma = false;
   if(asFor=="TRUE"){
     text = text+"Critical Thinking";
