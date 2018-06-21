@@ -1,6 +1,6 @@
 /*
 Next Steps:
-- name lesson plans
+- name lesson plans DONE
 - make new lesson for every line
 - change folder name
 - format the lesson plan better **add Date: and Lesson Name: and stuff to template, do not mess up keys
@@ -32,19 +32,30 @@ function addData(){
   var id = '1Xy9zobHc8o9yAHSIRYHvrY7KjRDo88__wHfbMuCe06I';
   var docFile = DriveApp.getFileById(id);
   
-  var folder = DriveApp.createFolder('Lesson Plan Test');
+  var folder = DriveApp.getFoldersByName('Lesson Plan Tool');
+  if(folder.hasNext() == false){
+   folder = DriveApp.createFolder('Lesson Plan Tool');
+  }
+  else{
+   folder = folder.next(); 
+  }
   
-  var template = DocumentApp.openById(docFile.makeCopy(folder).getId());
   var data = SpreadsheetApp.getActive().getSheetByName('Lesson Data').getDataRange().getDisplayValues();
- // for(var i = 1; i<data[0].length; i++){
-  //if(data[i][0]=="FALSE" || data[i][1] == "TRUE")
-  var template = DocumentApp.openById(docFile.makeCopy(folder).getId());
-    newPlan(data[1], template);
- // }
- // template.getBody().replaceText("##NAME##", "John Doe");
-
+  for(var i = 1; i<data[0].length; i++){
+    if(data[i][5] != ""){
+      if(data[i][0]=="FALSE" || data[i][1] == "TRUE"){
+        var template = DocumentApp.openById(docFile.makeCopy(folder).getId());
+        newPlan(data[1], template, data[i][1]);
+      }
+    }
+    else{
+      break; 
+    }
+  }
+  
 }
-function newPlan(lesson, template){
+
+function newPlan(lesson, template, update){
   
   var body = template.getBody();
   body.replaceText("LESSONNUM",lesson[4]);
@@ -59,7 +70,11 @@ function newPlan(lesson, template){
   body.replaceText("LESSON",lesson[20]); 
   body.replaceText("ACCOMMODATIONS",lesson[21]); 
   
-  template.setName(lesson[5] + " - " + lesson[2] );
+  if(update == "TRUE"){
+    template.setName(lesson[5] + " - " + lesson[2] + " UPDATE "+(new Date()).toDateString());
+  }else{
+    template.setName(lesson[5] + " - " + lesson[2]);
+  }
 }
 function assessment(asFor, as, of){
   var text = "Assessment: ";
